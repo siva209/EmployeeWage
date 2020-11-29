@@ -1,31 +1,37 @@
-
- #UC3 Calculate Employee part time wages
+#UC4 using switch case calculate Employee fulltime and part time wages
 
 import random
 
 class EmployeeWage:
- IS_FULL_TIME = 1
- IS_PART_TIME = 0
- EMP_WAGE_PER_HOUR = 20
- employeeHours = 0
+ FULL_TIME_HOUR = 8
+ PART_TIME_HOUR = 4
+ EMPLOYEE_ABSENT = 0
+ EMPLOYEE_WAGE_PER_HOUR = 20
+
+ randcheck = random.randint(0, 2)
 
  def checkEmpAttendance(self):
-  attendance = random.randint(0, 2)
-  if attendance == EmployeeWage.IS_FULL_TIME:
-   EmployeeWage.employeeHours = 8
+  if EmployeeWage.randcheck == 1:
    return "Employee is Present for Full Time"
-  elif attendance == EmployeeWage.IS_PART_TIME:
-   EmployeeWage.employeeHours = 4
+  elif EmployeeWage.randcheck == 2:
    return "Employee is Present for Part Time"
   else:
    return "Employee is Absent"
 
- def calculateDailyEmpWage(self):
-  dailyWage = EmployeeWage.EMP_WAGE_PER_HOUR * EmployeeWage.employeeHours
+ def empPerDayHours(self):
+  switch = {
+   0: EmployeeWage.EMPLOYEE_ABSENT,
+   1: EmployeeWage.FULL_TIME_HOUR,
+   2: EmployeeWage.PART_TIME_HOUR
+  }
+  return switch.get(EmployeeWage.randcheck)
+
+ def calculateDailyEmpWage(self, empHours):
+  dailyWage = EmployeeWage.EMPLOYEE_WAGE_PER_HOUR * empHours
   return "Employee Daily Wage is : " + str(dailyWage)
 
 
 if __name__ == "__main__":
  employee = EmployeeWage()
  print(employee.checkEmpAttendance())
- print(employee.calculateDailyEmpWage())
+ print(employee.calculateDailyEmpWage(employee.empPerDayHours()))
