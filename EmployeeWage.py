@@ -1,4 +1,4 @@
-#Program to demonstrate Calculating Employee Wages for Month
+#Program to demonstrate Calculate Employee wages till condition reached
 import random
 
 
@@ -8,6 +8,7 @@ class EmployeeWage:
     empHours = 0
     EMP_WAGE_PER_HOUR = 20
     NUM_OF_WORKING_DAYS = 20
+    MAXIMUM_HRS__IN_MONTH=100
 
     def checkEmpAttendance(self):
         attendance = random.randint(0, 2)
@@ -23,7 +24,10 @@ class EmployeeWage:
 
     def calculateMonthlyWages(self):
         totalSalary = 0
-        for i in range(1, 20):
+        totalEmployeeHours = 0
+        totalWorkingDays = 0
+        while  totalEmployeeHours < EmployeeWage.MAXIMUM_HRS__IN_MONTH and totalWorkingDays < EmployeeWage.NUM_OF_WORKING_DAYS:
+            totalWorkingDays += 1
             self.checkEmpAttendance()
             dailyWage = EmployeeWage.EMP_WAGE_PER_HOUR * EmployeeWage.empHours
             print(f"Employee daily Wage is : {dailyWage}")
