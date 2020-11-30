@@ -1,37 +1,37 @@
-#UC4 using switch case calculate Employee fulltime and part time wages
-
+#Program to demonstrate Calculating Employee Wages for Month
 import random
 
+
 class EmployeeWage:
- FULL_TIME_HOUR = 8
- PART_TIME_HOUR = 4
- EMPLOYEE_ABSENT = 0
- EMPLOYEE_WAGE_PER_HOUR = 20
+    IS_FULL_TIME = 1
+    IS_PART_TIME = 2
+    empHours = 0
+    EMP_WAGE_PER_HOUR = 20
+    NUM_OF_WORKING_DAYS = 20
 
- randcheck = random.randint(0, 2)
+    def checkEmpAttendance(self):
+        attendance = random.randint(0, 2)
+        if attendance == EmployeeWage.IS_FULL_TIME:
+            EmployeeWage.empHours = 8
+            print("Employee is present for Full Time")
+        elif attendance == EmployeeWage.IS_PART_TIME:
+            EmployeeWage.empHours = 4
+            print("Employee is present for Part Time")
+        else:
+            EmployeeWage.empHours = 0
+            print("Employee is Absent")
 
- def checkEmpAttendance(self):
-  if EmployeeWage.randcheck == 1:
-   return "Employee is Present for Full Time"
-  elif EmployeeWage.randcheck == 2:
-   return "Employee is Present for Part Time"
-  else:
-   return "Employee is Absent"
-
- def empPerDayHours(self):
-  switch = {
-   0: EmployeeWage.EMPLOYEE_ABSENT,
-   1: EmployeeWage.FULL_TIME_HOUR,
-   2: EmployeeWage.PART_TIME_HOUR
-  }
-  return switch.get(EmployeeWage.randcheck)
-
- def calculateDailyEmpWage(self, empHours):
-  dailyWage = EmployeeWage.EMPLOYEE_WAGE_PER_HOUR * empHours
-  return "Employee Daily Wage is : " + str(dailyWage)
+    def calculateMonthlyWages(self):
+        totalSalary = 0
+        for i in range(1, 20):
+            self.checkEmpAttendance()
+            dailyWage = EmployeeWage.EMP_WAGE_PER_HOUR * EmployeeWage.empHours
+            print(f"Employee daily Wage is : {dailyWage}")
+            totalSalary = totalSalary + dailyWage
+        else:
+            print(f"Employee Wage for Month is : {totalSalary}")
 
 
 if __name__ == "__main__":
- employee = EmployeeWage()
- print(employee.checkEmpAttendance())
- print(employee.calculateDailyEmpWage(employee.empPerDayHours()))
+    employee = EmployeeWage()
+    employee.calculateMonthlyWages()
