@@ -1,4 +1,4 @@
-#Program to demonstrate Calculate Employee wages till condition reached
+#Program to demonstrate store the Employee Daily wages along with Total Wages in List
 import random
 
 
@@ -8,7 +8,8 @@ class EmployeeWage:
     empHours = 0
     EMP_WAGE_PER_HOUR = 20
     NUM_OF_WORKING_DAYS = 20
-    MAXIMUM_HRS__IN_MONTH=100
+    MAX_HRS_IN_MONTH = 100
+    EmployeedailyWages = []
 
     def checkEmpAttendance(self):
         attendance = random.randint(0, 2)
@@ -24,16 +25,21 @@ class EmployeeWage:
 
     def calculateMonthlyWages(self):
         totalSalary = 0
-        totalEmployeeHours = 0
+        totalEmpHours = 0
         totalWorkingDays = 0
-        while  totalEmployeeHours < EmployeeWage.MAXIMUM_HRS__IN_MONTH and totalWorkingDays < EmployeeWage.NUM_OF_WORKING_DAYS:
+        while totalEmpHours < EmployeeWage.MAX_HRS_IN_MONTH and totalWorkingDays < EmployeeWage.NUM_OF_WORKING_DAYS:
             totalWorkingDays += 1
             self.checkEmpAttendance()
-            dailyWage = EmployeeWage.EMP_WAGE_PER_HOUR * EmployeeWage.empHours
-            print(f"Employee daily Wage is : {dailyWage}")
-            totalSalary = totalSalary + dailyWage
-        else:
-            print(f"Employee Wage for Month is : {totalSalary}")
+            totalEmpHours += EmployeeWage.empHours
+            print(
+                f"Days : {totalWorkingDays} and Emp Hours : {EmployeeWage.empHours} and Total Hours : {totalEmpHours}")
+            dailyWage = dailyWage = EmployeeWage.EMP_WAGE_PER_HOUR * EmployeeWage.empHours
+            print(f"Employee Daily Wage : {dailyWage}")
+            EmployeeWage.EmployeedailyWages.append(dailyWage)
+
+        totalSalary = EmployeeWage.EMP_WAGE_PER_HOUR * totalEmpHours
+        print("Daily Wages : " + str(EmployeeWage.EmployeedailyWages))
+        print(f"Employee Wage for Month is : {totalSalary}")
 
 
 if __name__ == "__main__":
